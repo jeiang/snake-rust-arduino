@@ -9,7 +9,7 @@ use crate::rand::{Random, RandomGenerator};
 
 use self::{direction::Direction, position::Position, snake::Snake};
 
-const SNAKE_LEN: usize = 10;
+const SNAKE_LEN: usize = 20;
 const X_LIM: isize = 8;
 const Y_LIM: isize = 8;
 

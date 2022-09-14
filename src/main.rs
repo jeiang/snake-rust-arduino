@@ -41,17 +41,22 @@ fn main() -> ! {
     let mut direction = Direction::Right;
 
     loop {
-        delay_ms(125);
-        let reading = stick.get_reading();
-
-        ufmt::uwriteln!(&mut serial, "Reading: {:?}", reading).void_unwrap();
-        let cmd = if reading.is_pressed {
-            Command::Reset
-        } else {
-            if let Some(dir) = reading.to_direction() {
-                direction = dir;
+        ufmt::uwriteln!(&mut serial, "Reading...").void_unwrap();
+        let cmd = {
+            let mut pressed = false;
+            for _ in 0..10 {
+                delay_ms(10);
+                let reading = stick.get_reading();
+                pressed |= reading.is_pressed;
+                if let Some(dir) = reading.to_direction() {
+                    direction = dir;
+                }
             }
-            Command::Move(direction)
+            if pressed {
+                Command::Reset
+            } else {
+                Command::Move(direction)
+            }
         };
         ufmt::uwriteln!(serial, "Command: {:?}", direction).void_unwrap();
 
@@ -72,7 +77,7 @@ fn main() -> ! {
             }
             game::GameResult::Restarting => {
                 ufmt::uwriteln!(&mut serial, "Restarting...").void_unwrap();
-                for _ in 0..2{
+                for _ in 0..2 {
                     display.flash(true);
                     delay_ms(500);
                     display.flash(false);
