@@ -1,51 +1,33 @@
-`avr-hal-template`
+`Snake using Rust on Arduino?`
 ==================
-[`cargo-generate`] template for jumpstarting projects on common AVR
-microcontroller boards.  This template supports the following hardware at this
-time:
 
+Snake made using Rust on an Arduino Mega 2560. Likely will work on the following: 
  - Arduino Leonardo
- - Arduino Mega 2560
  - Arduino Nano
  - Arduino Uno
  - SparkFun ProMicro
  - Adafruit Trinket
  - Adafruit Trinket Pro
+with some modification.
+
+## Requirements
+1. Compatible Arduino (see [avr-hal](https://github.com/Rahix/avr-hal))
+2. Toolchain & ravedude (see [Quickstart](https://github.com/Rahix/avr-hal#quickstart))
+3. MAX7219 8x8 Matrix LED Display
+4. Analog Joystick with pressbutton
+5. Wires, power supply (the Arduino Mega 2560 does not provide enough current to power the display), etc.
 
 ## Usage
-If you don't have them already, install [`cargo-generate`] and [`ravedude`]:
-
+Connect the Arduino (if not an Arduino Mega 2560, ensure necessary modifications are made) via USB and run
 ```bash
-cargo install cargo-generate
-cargo install ravedude
+cargo run --release
 ```
-
-Then instanciate this template:
-
-```bash
-cargo generate --git https://github.com/Rahix/avr-hal-template.git
-```
-
-You will be prompted to select your board - do so and you're ready to roll!
-Everything is prepared so you should be able to just
-
-```bash
-cargo run
-```
-
-and see a blinky flashed to your board!
-
-[`cargo-generate`]: https://github.com/cargo-generate/cargo-generate
-[`ravedude`]: https://github.com/Rahix/avr-hal/tree/next/ravedude
+Assuming no problems with detection, the serial output should be a reflection of the game state. If you do not see output on the Arduino, ensure that the serial output shows a the "game" and ensure connections are made correctly. 
 
 ## License
 Licensed under either of
-
- - Apache License, Version 2.0
-   ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
- - MIT license
-   ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
-
+- Apache License, Version 2.0 (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
 at your option.
 
 ## Contribution
